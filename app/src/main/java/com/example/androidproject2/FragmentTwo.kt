@@ -1,6 +1,5 @@
 package com.example.androidproject2
 
-
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.androidproject2.databinding.FragmentTwoBinding
-//import kotlinx.android.synthetic.main.fragment_two.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FragmentTwo : Fragment() {
 
     private lateinit var binding: FragmentTwoBinding
+    private var wheelRotationAngle: Float = 0f
+
     private lateinit var turningWheelAnimation: AnimationDrawable
 
     override fun onCreateView(
@@ -29,8 +29,8 @@ class FragmentTwo : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Start turning wheel animation
-        binding.turningWheelImageView.setImageResource(R.drawable.wheeloftime)
-        turningWheelAnimation = binding.turningWheelImageView.drawable as AnimationDrawable
+        binding.turningWheelImageView.setBackgroundResource(R.drawable.wheel_animation)
+        val turningWheelAnimation = binding.turningWheelImageView.background as AnimationDrawable
         turningWheelAnimation.start()
 
         // Update date and time every second

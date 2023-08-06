@@ -1,5 +1,6 @@
 package com.example.androidproject2
 
+import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -13,6 +14,8 @@ import java.util.*
 class FragmentOne : Fragment() {
 
     private lateinit var binding: FragmentOneBinding
+    private lateinit var turningWheelAnimation: AnimationDrawable
+
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var seasonalImages: List<Drawable>
     private lateinit var seasonalMusic: List<Int>
@@ -29,6 +32,24 @@ class FragmentOne : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Start cloud, sun, and birds animation
+        binding.cloudImageView.setBackgroundResource(R.drawable.cloud_animation)
+        val cloudAnimation = binding.cloudImageView.background as AnimationDrawable
+        cloudAnimation.start()
+
+        // Start birds animation
+        binding.birdsImageView.setBackgroundResource(R.drawable.birds_animation)
+        val birdsAnimation = binding.birdsImageView.background as AnimationDrawable
+        birdsAnimation.start()
+
+        // Start sun animation
+        binding.sunImageView.setBackgroundResource(R.drawable.sun_animation)
+        val sunAnimation = binding.sunImageView.background as AnimationDrawable
+        sunAnimation.start()
+
+        // Update background and images based on time
+        updateBackgroundAndImages()
 
         // Initialize the media player
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.autumn_song)
@@ -84,6 +105,50 @@ class FragmentOne : Fragment() {
         timer.cancel()
     }
 
+    // Add the updateBackgroundAndImages() function
+    private fun updateBackgroundAndImages() {
+        // Get current time
+        val currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
+        // Set background color based on time (example: blue for morning, yellow for afternoon, etc.)
+        val backgroundColor = when (currentTime) {
+            in 0..11 -> R.color.colorMorning // Define color resources in res/values/colors.xml
+            in 12..17 -> R.color.colorAfternoon
+            else -> R.color.colorEvening
+        }
+
+        // Set the background color
+        requireActivity().runOnUiThread {
+            binding.fragmentContainer.setBackgroundColor(requireContext().getColor(backgroundColor))
+        }
+
+        // Set seasonal images based on time
+        val currentSeasonalImages = when (currentTime) {
+            in 0..11 -> listOf(
+                R.drawable.cloud_1,
+                R.drawable.sun3f,
+                R.drawable.birds_1
+            )
+            in 12..17 -> listOf(
+                R.drawable.cloud_1,
+                R.drawable.sun3f,
+                R.drawable.birds_1
+            )
+            else -> listOf(
+                R.drawable.cloud_1,
+                R.drawable.sun3f,
+                R.drawable.birds_1
+            )
+        }
+
+        // Set the images
+        requireActivity().runOnUiThread {
+            binding.cloudImageView.setImageResource(currentSeasonalImages[0])
+            binding.sunImageView.setImageResource(currentSeasonalImages[1])
+            binding.birdsImageView.setImageResource(currentSeasonalImages[2])
+        }
+    }
+
     private fun updateBackgroundColor() {
         // Get current time
         val currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
@@ -131,5 +196,3 @@ class FragmentOne : Fragment() {
         timer.cancel()
     }
 }
-
-

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_one.xml -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
 
     <!-- Your name -->
     <TextView
@@ -30,16 +30,36 @@
         android:text="Stop"
         android:textSize="18sp" />
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+    <ImageView
+        android:id="@+id/cloudImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cloud_1" />
+
+    <ImageView
+        android:id="@+id/sunImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sun3f" />
+
+    <ImageView
+        android:id="@+id/birdsImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/birds_1" />
 
     <ImageView
         android:id="@+id/seasonalImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/cloud_1" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+
 
 </LinearLayout>

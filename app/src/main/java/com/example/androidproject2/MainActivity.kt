@@ -10,7 +10,11 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FragmentOne()) // Corrected fragment_container
+                .replace(R.id.fragment_container, FragmentOne())
+                .commit()
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_two, FragmentTwo())
                 .commit()
         }
     }
